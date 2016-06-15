@@ -21,7 +21,28 @@ class MainView extends Component {
   constructor() {
     super();
     this.state = {
-      days: [ ]
+      days: [ 
+        {
+        key: 0,
+        title: 'A stopwatch',
+        component: null,
+        isFA: false,
+        icon: 'ios-stopwatch',
+        size: 50,
+        color: '#ff856c',
+        hideNav: false
+        },
+        {
+          key: 1,
+          title: 'A weather app',
+          component: null,
+          isFA: false,
+          icon: 'ios-partly-sunny',
+          size: 50,
+          color: '#90bdc2',
+          hideNav: true
+        }
+      ]
     }
   }
 
