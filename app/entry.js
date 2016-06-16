@@ -16,6 +16,8 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import IconFa from 'react-native-vector-icons/FontAwesome';
 import Swiper from 'react-native-swiper';
 
+import Day1 from './scripts/watch';
+import Day2 from './scripts/weather';
 
 class MainView extends Component {
   constructor() {
@@ -25,7 +27,7 @@ class MainView extends Component {
         {
         key: 0,
         title: 'A stopwatch',
-        component: null,
+        component: Day1,
         isFA: false,
         icon: 'ios-stopwatch',
         size: 50,
