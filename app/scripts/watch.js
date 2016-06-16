@@ -1,0 +1,370 @@
+'use strict';
+
+import React, { Component, PropTypes } from 'react';
+import {
+  ListView,
+  StyleSheet,
+  Text,
+  TouchableHighlight,
+  View
+} from 'react-native';
+import Util from '../utils';
+
+class WatchFace extends Component {
+  static propTypes = {
+    sectionTime: PropTypes.string.isRequired,
+    totalTime: PropTypes.string.isRequired
+  };
+  
+  render() {
+    return (
+      <View style={styles.watchFaceContainer}>
+        <Text style={styles.sectionTime}>
+          {this.props.sectionTime}
+        </Text>
+        <Text style={[styles.totalTime]} >
+          {this.props.totalTime}
+        </Text>
+      </View>
+    );
+  }
+}
+
+class WatchControl extends Component {
+  static propTypes = {
+    stopWatch: PropTypes.func.isRequired,
+    clearRecord: PropTypes.func.isRequired,
+    startWatch: PropTypes.func.isRequired,
+    addRecord: PropTypes.func.isRequired
+  }
+  
+  constructor(props) {
+    super(props);
+    this.state = {
+      watchOn: false,
+      startBtnText: '启动',
+      startBtnColor: '#60b644',
+      stopBtnText: '计次',
+      underlayColor: '#fff'
+    }
+  }
+  
+  _startWatch() {
+    this.setState({
+      watchOn: !this.state.watchOn
+    }, function() {
+      if (this.state.watchOn) {
+        this.props.startWatch()
+        this.setState({
+          startBtnText: '停止',
+          startBtnColor: '#ff0044',
+          stopBtnText: '计次',
+          underlayColor: '#eee'
+        })
+      } else {
+        this.props.stopWatch()
+        this.setState({
+          startBtnText: '启动',
+          startBtnColor: '#60B644',
+          stopBtnText: '复位',
+          underlayColor: '#eee'
+        })
+      } 
+    });
+  }
+
+  _addRecord() {
+    if (this.state.watchOn) {
+      this.props.addRecord();
+    } else {
+      this.props.clearRecord();
+      this.setState({
+        stopBtnText: '计次'
+      })
+    }
+  }
+  
+  render() {
+    return (
+      <View style={styles.watchControlContainer}>
+        <View style={{flex: 1, alignItems: 'flex-start'}}>
+          <TouchableHighlight
+            style={styles.btnStop} 
+            underlayColor={this.state.underlayColor}
+            onPress={() => this._addRecord()}>
+            <Text style={styles.btnStopText}>{this.state.stopBtnText}</Text>
+          </TouchableHighlight>
+        </View>
+        <View style={{flex: 1, alignItems: 'flex-end'}}>
+          <TouchableHighlight
+            style={styles.btnStart} 
+            underlayColor='#eee'
+            onPress={() => this._startWatch()}>
+            <Text style={[styles.btnStartText, {color: this.state.startBtnColor}]}>
+              {this.state.startBtnText}
+            </Text>
+          </TouchableHighlight>
+        </View>
+      </View>
+    );
+  }
+    
+}
+
+class WatchRecord extends Component{
+  static propTypes = {
+    record: React.PropTypes.array.isRequired,
+  }; 
+
+  render() {
+    let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
+    theDataSource = ds.cloneWithRows(this.props.record);
+    return (
+      <ListView
+        style={styles.recordList}
+        dataSource={theDataSource}
+        renderRow={(rowData) => 
+          <View style={styles.recordItem}>
+            <Text style={styles.recordItemTitle}>{rowData.title}</Text>
+            <View style={{alignItems: "center"}}>
+              <Text style={styles.recordItemTime}>{rowData.time}</Text>
+            </View>
+          </View>} />
+    );
+  }
+}
+
+let defaultState = {
+  stopWatch: false,
+  resetWatch: true,
+  intialTime: 0,
+  currentTime:0,
+  recordTime:0,
+  timeAccumulation:0,
+  totalTime: '00:00.00',
+  sectionTime: '00:00.00',
+  recordCounter: 0,
+  record:[
+    {title:'',time:''},
+    {title:'',time:''},
+    {title:'',time:''},
+    {title:'',time:''},
+    {title:'',time:''},
+    {title:'',time:''},
+    {title:'',time:''},
+    {title:'',time:''},
+    {title:'',time:''}
+  ],
+};
+
+let resetState = {
+  stopWatch: false,
+  resetWatch: true,
+  intialTime: 0,
+  currentTime:0,
+  recordTime:0,
+  timeAccumulation:0,
+  totalTime: '00:00.00',
+  sectionTime: '00:00.00',
+  recordCounter: 0,
+  record:[
+    {title:'',time:''},
+    {title:'',time:''},
+    {title:'',time:''},
+    {title:'',time:''},
+    {title:'',time:''},
+    {title:'',time:''},
+    {title:'',time:''},
+    {title:'',time:''},
+    {title:'',time:''}
+  ],
+};
+
+export default class Watch extends Component{
+  constructor() {
+    super();
+    this.state = defaultState;
+  }
+  
+  componentWillUnmount() {
+    this._stopWatch();
+    this._clearRecord();
+  }
+
+  _startWatch() {
+    if (this.state.resetWatch) {
+      this.setState({
+        stopWatch: false,
+        resetWatch: false,
+        timeAccumulation:0,
+        initialTime: (new Date()).getTime()
+      }, () => {
+        watching(this);
+      }) 
+    }else{
+      this.setState({
+        stopWatch: false,
+        initialTime: (new Date()).getTime()
+      }, () => {
+        watching(this);
+      })
+    }
+    
+    let watching = (me) => {
+      let milSecond, second, minute, countingTime, secmilSecond, secsecond, secminute, seccountingTime;
+      let interval = setInterval(
+        () => { 
+          me.setState({
+            currentTime: (new Date()).getTime()
+          })
+          countingTime = me.state.timeAccumulation + me.state.currentTime - me.state.initialTime;
+          minute = Math.floor(countingTime/(60*1000));
+          second = Math.floor((countingTime-6000*minute)/1000);
+          milSecond = Math.floor((countingTime%1000)/10);
+          seccountingTime = countingTime - me.state.recordTime;
+          secminute = Math.floor(seccountingTime/(60*1000));
+          secsecond = Math.floor((seccountingTime-6000*secminute)/1000);
+          secmilSecond = Math.floor((seccountingTime%1000)/10);
+          me.setState({
+            totalTime: (minute<10? "0"+minute:minute)+":"+(second<10? "0"+second:second)+"."+(milSecond<10? "0"+milSecond:milSecond),
+            sectionTime: (secminute<10? "0"+secminute:secminute)+":"+(secsecond<10? "0"+secsecond:secsecond)+"."+(secmilSecond<10? "0"+secmilSecond:secmilSecond),
+          })
+          if (me.state.stopWatch) {
+            me.setState({
+              timeAccumulation: countingTime 
+            }, () => {
+              clearInterval(interval)
+            })
+          };
+        },50);     
+    }
+  }
+
+  _stopWatch() {
+    this.setState({
+      stopWatch: true
+    })
+  }
+
+  _addRecord() {
+    let {recordCounter, record} = this.state;
+    recordCounter++;
+    if (recordCounter<8) {
+      record.pop();
+    }
+    record.unshift({title:"计次"+recordCounter,time:this.state.sectionTime});
+    this.setState({
+      recordTime: this.state.timeAccumulation + this.state.currentTime - this.state.initialTime,
+      recordCounter: recordCounter,
+      record: record
+    })
+  }
+
+  _clearRecord() {
+    this.setState(resetState);
+  }
+  
+  render() {
+    return (
+      <View style={styles.watchContainer}>
+        <WatchFace 
+          totalTime={this.state.totalTime} 
+          sectionTime={this.state.sectionTime} />
+        <WatchControl 
+          addRecord={() => this._addRecord()}
+          clearRecord={() => this._clearRecord()}
+          startWatch={() => this._startWatch()}
+          stopWatch={() => this._stopWatch()} />
+        <WatchRecord record={this.state.record} />
+      </View>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  watchContainer: {
+    marginTop: 50,
+    alignItems: 'center'
+  },
+  watchFaceContainer: {
+    width: Util.size.width,
+    paddingTop: 50, paddingLeft: 30, paddingRight: 30, paddingBottom: 40,
+    backgroundColor: '#fff',
+    borderBottomWidth: Util.pixel * 2, borderBottomColor: '#ddd',
+    height: 170
+  },
+  sectionTime: {
+    fontSize: 20,
+    fontWeight: '100',
+    paddingRight: 30,
+    color: '#555',
+    position: 'absolute',
+    left: Util.size.width - 140,
+    top: 30
+  },
+  totalTime: {
+    fontSize: Util.size.width === 375 ? 70 : 60,
+    fontWeight: '100',
+    color: '#222',
+    paddingLeft: 20
+  },
+  watchControlContainer: {
+    width: Util.size.width,
+    height: 100,
+    flexDirection: 'row',
+    backgroundColor: '#f3f3f3',
+    paddingTop: 15, paddingLeft: 60, paddingRight: 60, paddingBottom: 15
+  },
+  btnStart: {
+    width: 70,
+    height: 70,
+    borderRadius: 35,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  btnStop: {
+    width: 70,
+    height: 70,
+    borderRadius: 35,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  btnStartText: {
+    fontSize: 14,
+    backgroundColor: 'transparent'
+  },
+  btnStopText: {
+    fontSize: 14,
+    backgroundColor: 'transparent',
+    color: '#555'
+  },
+  recordList: {
+    width: Util.size.width,
+    height: Util.size.height - 350,
+    paddingLeft: 15
+  },
+  recordItem: {
+    height: 40,
+    borderBottomWidth: Util.pixel, 
+    borderBottomColor: '#bbb',
+    paddingTop: 5, paddingLeft: 10, paddingRight: 10, paddingBottom: 5,
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  recordItemTitle: {
+    backgroundColor: 'transparent',
+    flex: 1,
+    textAlign: 'left',
+    paddingLeft: 20,
+    color: '#777'
+  },
+  recordItemTime: {
+    backgroundColor: 'transparent',
+    flex: 1,
+    textAlign: 'right',
+    paddingRight: 20,
+    color: '#222'
+  }
+})
