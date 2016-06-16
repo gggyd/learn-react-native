@@ -37,7 +37,7 @@ class MainView extends Component {
         {
           key: 1,
           title: 'A weather app',
-          component: null,
+          component: Day2,
           isFA: false,
           icon: 'ios-partly-sunny',
           size: 50,
