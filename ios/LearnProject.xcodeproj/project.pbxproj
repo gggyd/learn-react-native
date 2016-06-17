@@ -29,6 +29,7 @@
 		4C52EFB91D11A176000FC650 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4C52EFB11D11A176000FC650 /* MaterialIcons.ttf */; };
 		4C52EFBA1D11A176000FC650 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4C52EFB21D11A176000FC650 /* Octicons.ttf */; };
 		4C52EFBB1D11A176000FC650 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4C52EFB31D11A176000FC650 /* Zocial.ttf */; };
+		4CEF84CB1D12E5AF0035579B /* CalendarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CEF84CA1D12E5AF0035579B /* CalendarManager.m */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 /* End PBXBuildFile section */
 
@@ -140,6 +141,8 @@
 		4C52EFB11D11A176000FC650 /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialIcons.ttf; sourceTree = "<group>"; };
 		4C52EFB21D11A176000FC650 /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Octicons.ttf; sourceTree = "<group>"; };
 		4C52EFB31D11A176000FC650 /* Zocial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Zocial.ttf; sourceTree = "<group>"; };
+		4CEF84BF1D12E4220035579B /* CalendarManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarManager.h; sourceTree = "<group>"; };
+		4CEF84CA1D12E5AF0035579B /* CalendarManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarManager.m; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -255,6 +258,8 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				4CEF84BF1D12E4220035579B /* CalendarManager.h */,
+				4CEF84CA1D12E5AF0035579B /* CalendarManager.m */,
 			);
 			name = LearnProject;
 			sourceTree = "<group>";
@@ -584,6 +589,7 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				4CEF84CB1D12E5AF0035579B /* CalendarManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

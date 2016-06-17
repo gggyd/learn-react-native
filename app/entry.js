@@ -18,6 +18,7 @@ import Swiper from 'react-native-swiper';
 
 import Day1 from './scripts/watch';
 import Day2 from './scripts/weather';
+import Day3 from './scripts/calendar';
 
 class MainView extends Component {
   constructor() {
@@ -25,14 +26,14 @@ class MainView extends Component {
     this.state = {
       days: [ 
         {
-        key: 0,
-        title: 'A stopwatch',
-        component: Day1,
-        isFA: false,
-        icon: 'ios-stopwatch',
-        size: 50,
-        color: '#ff856c',
-        hideNav: false
+          key: 0,
+          title: 'A stopwatch',
+          component: Day1,
+          isFA: false,
+          icon: 'ios-stopwatch',
+          size: 50,
+          color: '#ff856c',
+          hideNav: false
         },
         {
           key: 1,
@@ -43,6 +44,16 @@ class MainView extends Component {
           size: 50,
           color: '#90bdc2',
           hideNav: true
+        },
+        {
+          key: 3,
+          title: 'A Calendar',
+          component: Day3,
+          isFA: false,
+          icon: 'ios-stopwatch',
+          size: 50,
+          color: '#ff856c',
+          hideNav: false
         }
       ]
     }
