@@ -14,10 +14,17 @@
 
 RCT_EXPORT_MODULE();
 
-RCT_EXPORT_METHOD(addEvent:(NSString *)name location:(NSString *)location date:
-                  (NSDate *)date)
+RCT_EXPORT_METHOD(addEvent:(NSString *)name details:(NSDictionary *) details)
 {
-  RCTLogInfo(@"%@ in %@", name, location);
+  NSString *location = [RCTConvert NSString:details[@"location"]];
+  NSDate *time = [RCTConvert NSDate:details[@"time"]];
+  
+  RCTLogInfo(@"%@ in %@, %@", name, location, time);
+}
+
+RCT_EXPORT_METHOD(findEvents:(RCTResponseSenderBlock) callback)
+{
+  
 }
 
 @end
