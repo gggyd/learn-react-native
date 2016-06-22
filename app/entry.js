@@ -20,6 +20,7 @@ import Day1 from './scripts/watch';
 import Day2 from './scripts/weather';
 import Day3 from './scripts/calendar';
 import Day4 from './scripts/twitterTab';
+import Day5 from './scripts/mapView';
 
 class MainView extends Component {
   constructor() {
@@ -64,6 +65,16 @@ class MainView extends Component {
           icon: 'ios-stopwatch',
           size: 50,
           color: '#ff856c',
+          hideNav: false
+        },
+        {
+          key: 5,
+          title: 'A MapView',
+          component: Day5,
+          isFA: false,
+          icon: 'ios-locate',
+          size: 50,
+          color: '#00D204',
           hideNav: false
         }
       ]
