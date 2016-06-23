@@ -30,6 +30,7 @@
 		4C52EFB91D11A176000FC650 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4C52EFB11D11A176000FC650 /* MaterialIcons.ttf */; };
 		4C52EFBA1D11A176000FC650 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4C52EFB21D11A176000FC650 /* Octicons.ttf */; };
 		4C52EFBB1D11A176000FC650 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4C52EFB31D11A176000FC650 /* Zocial.ttf */; };
+		4C6F06DE1D1C1F4C00A0E8BD /* libRCTVideo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C4E83661D1AD40600295093 /* libRCTVideo.a */; };
 		4CE761291D141BCD00794BFE /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE761281D141B6700794BFE /* libRNVectorIcons.a */; };
 		4CEF84CB1D12E5AF0035579B /* CalendarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CEF84CA1D12E5AF0035579B /* CalendarManager.m */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
@@ -178,6 +179,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C6F06DE1D1C1F4C00A0E8BD /* libRCTVideo.a in Frameworks */,
 				4CE761291D141BCD00794BFE /* libRNVectorIcons.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
