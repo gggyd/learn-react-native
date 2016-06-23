@@ -24,6 +24,8 @@ import Day5 from './scripts/mapView';
 import Day6 from './scripts/intro';
 import Day7 from './scripts/gesture';
 
+import Day9 from './scripts/twitterUser';
+
 class MainView extends Component {
   constructor() {
     super();
@@ -98,7 +100,17 @@ class MainView extends Component {
           size:50,
           color:"#5e2a06",
           hideNav: true,
-      }
+        },
+        {
+          key: 8,
+          title:"Twitter Parallax View",
+          component: Day9,
+          isFA: false,
+          icon: "logo-twitter",
+          size:50,
+          color:"#2aa2ef",
+          hideNav: true,
+        }
       ]
     }
   }
