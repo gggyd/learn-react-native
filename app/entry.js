@@ -21,6 +21,8 @@ import Day2 from './scripts/weather';
 import Day3 from './scripts/calendar';
 import Day4 from './scripts/twitterTab';
 import Day5 from './scripts/mapView';
+import Day6 from './scripts/intro';
+import Day7 from './scripts/gesture';
 
 class MainView extends Component {
   constructor() {
@@ -48,7 +50,7 @@ class MainView extends Component {
           hideNav: true
         },
         {
-          key: 3,
+          key: 2,
           title: 'A Calendar',
           component: Day3,
           isFA: false,
@@ -58,7 +60,7 @@ class MainView extends Component {
           hideNav: false
         },
         {
-          key: 4,
+          key: 3,
           title: 'A Twitter Tab',
           component: Day4,
           isFA: false,
@@ -68,7 +70,7 @@ class MainView extends Component {
           hideNav: false
         },
         {
-          key: 5,
+          key: 4,
           title: 'A MapView',
           component: Day5,
           isFA: false,
@@ -76,7 +78,27 @@ class MainView extends Component {
           size: 50,
           color: '#00D204',
           hideNav: false
-        }
+        },
+        {
+          key: 5,
+          title:"Spotify",
+          component: Day6,
+          isFA: true,
+          icon: "spotify",
+          size:50,
+          color:"#777",
+          hideNav: true,
+        },
+        {
+          key: 6,
+          title:"Moveable Circle",
+          component: Day7,
+          isFA: false,
+          icon: "ios-baseball",
+          size:50,
+          color:"#5e2a06",
+          hideNav: true,
+      }
       ]
     }
   }
@@ -110,7 +132,7 @@ class MainView extends Component {
               Day{index + 1}
               {
                 elem.isFA ? 
-                <IconFA /> : 
+                <IconFa size={elem.size} name={elem.icon} style={[styles.boxIcon,{color:elem.color}]}></IconFa> : 
                 <Icon size={elem.size} name={elem.icon} style={[styles.boxIcon, {color: elem.color}]} />
               }
             </Text>
