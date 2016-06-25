@@ -23,8 +23,11 @@ import Day4 from './scripts/twitterTab';
 import Day5 from './scripts/mapView';
 import Day6 from './scripts/intro';
 import Day7 from './scripts/gesture';
-
+import Day8 from './scripts/sideMenu';
 import Day9 from './scripts/twitterUser';
+import Day13 from './scripts/twitterUI';
+import Day15 from './scripts/pickerIOS';
+import Day30 from './scripts/pushNotice';
 
 class MainView extends Component {
   constructor() {
@@ -102,6 +105,16 @@ class MainView extends Component {
           hideNav: true,
         },
         {
+          key:7,
+          title:"Swipe Left Menu",
+          component: Day8,
+          isFA: true,
+          icon: "google",
+          size:50,
+          color:"#4285f4",
+          hideNav: true,
+        },
+        {
           key: 8,
           title:"Twitter Parallax View",
           component: Day9,
@@ -110,6 +123,35 @@ class MainView extends Component {
           size:50,
           color:"#2aa2ef",
           hideNav: true,
+        },
+        {
+          key: 12,
+          title:"Twitter UI",
+          component: Day13,
+          isFA: false,
+          icon: "ios-chatboxes",
+          size:50,
+          color:"#2aa2ef",
+          hideNav: true,
+        },{
+          key:14,
+          title:"Time picker",
+          component: Day15,
+          isFA: false,
+          icon: "ios-calendar-outline",
+          size:50,
+          color:"#ec240e",
+          hideNav: false,
+        },
+        {
+          key:29,
+          title:"Push Notice",
+          component: Day30,
+          isFA: false,
+          icon: "ios-calendar-outline",
+          size:50,
+          color:"#ec240e",
+          hideNav: false,
         }
       ]
     }

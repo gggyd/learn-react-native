@@ -44,35 +44,34 @@ class MoveableCircle extends Component {
   componentWillMount() {
     this._panResponder = PanResponder.create({
       onStartShouldSetPanResponder: (evt, gestureState) => true,
-        onStartShouldSetPanResponderCapture: (evt, gestureState) => true,
-        onMoveShouldSetPanResponder: (evt, gestureState) => true,
-        onMoveShouldSetPanResponderCapture: (evt, gestureState) => true,
-        onPanResponderGrant: (evt, gestureState) => {
-          this.setState({
-            color: "white",
-          })
-        },
-        onPanResponderMove: (evt, gestureState) => {
-           this._circleStyles.style.left = this._previousLeft + gestureState.dx;
-           this._circleStyles.style.top = this._previousTop + gestureState.dy;
-           if (this._circleStyles.style.left<0) {
-              this._circleStyles.style.left = 0;
-           };
-           if (this._circleStyles.style.top<5) {
-              this._circleStyles.style.top = 5;
-           };
-           if (this._circleStyles.style.left>this._maxLeft) {
-              this._circleStyles.style.left = this._maxLeft;
-           };
-           if (this._circleStyles.style.top>this._maxTop) {
-              this._circleStyles.style.top = this._maxTop;
-           };
-           this._updatePosition();
-        },
-        onPanResponderTerminationRequest: (evt, gestureState) => true,
-        onPanResponderRelease: (evt, gestureState) => this._endMove(evt, gestureState),
-        onPanResponderTerminate: (evt, gestureState) => this._endMove(evt, gestureState),
-    
+      onStartShouldSetPanResponderCapture: (evt, gestureState) => true,
+      onMoveShouldSetPanResponder: (evt, gestureState) => true,
+      onMoveShouldSetPanResponderCapture: (evt, gestureState) => true,
+      onPanResponderGrant: (evt, gestureState) => {
+        this.setState({
+          color: "white",
+        })
+      },
+      onPanResponderMove: (evt, gestureState) => {
+          this._circleStyles.style.left = this._previousLeft + gestureState.dx;
+          this._circleStyles.style.top = this._previousTop + gestureState.dy;
+          if (this._circleStyles.style.left<0) {
+            this._circleStyles.style.left = 0;
+          };
+          if (this._circleStyles.style.top<5) {
+            this._circleStyles.style.top = 5;
+          };
+          if (this._circleStyles.style.left>this._maxLeft) {
+            this._circleStyles.style.left = this._maxLeft;
+          };
+          if (this._circleStyles.style.top>this._maxTop) {
+            this._circleStyles.style.top = this._maxTop;
+          };
+          this._updatePosition();
+      },
+      onPanResponderTerminationRequest: (evt, gestureState) => true,
+      onPanResponderRelease: (evt, gestureState) => this._endMove(evt, gestureState),
+      onPanResponderTerminate: (evt, gestureState) => this._endMove(evt, gestureState),
     });
 
     this._circleStyles = {
