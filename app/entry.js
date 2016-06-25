@@ -25,6 +25,7 @@ import Day6 from './scripts/intro';
 import Day7 from './scripts/gesture';
 import Day8 from './scripts/sideMenu';
 import Day9 from './scripts/twitterUser';
+import Day10 from './scripts/blurView';
 import Day13 from './scripts/twitterUI';
 import Day15 from './scripts/pickerIOS';
 import Day30 from './scripts/pushNotice';
@@ -122,6 +123,15 @@ class MainView extends Component {
           icon: "logo-twitter",
           size:50,
           color:"#2aa2ef",
+          hideNav: true,
+        },{
+          key:9,
+          title:"Tumblr Menu",
+          component: Day10,
+          isFA: false,
+          icon: "logo-tumblr",
+          size:50,
+          color:"#37465c",
           hideNav: true,
         },
         {
